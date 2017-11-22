@@ -6,15 +6,7 @@ def score(game):
     for index, actual_point in enumerate(game):
         result += calculate_frame_result(index, actual_point, frame, game, last_point)
         last_point = get_value(actual_point)
-        if not in_first_half:
-            frame += 1
-        if in_first_half is True:
-            in_first_half = False
-        else:
-            in_first_half = True
-        if actual_point.lower() == 'x':
-            in_first_half = True
-            frame += 1
+        in_first_half, frame = checking_first_half(in_first_half, actual_point, frame)
     return result
 
 
@@ -49,3 +41,16 @@ def calculate_frame_result(index, actual_point, frame, game, last_point):
             else:
                 actual_result += get_value(game[index + 2])
     return actual_result
+
+
+def checking_first_half(in_first_half, actual_point, frame):
+    if not in_first_half:
+        frame += 1
+    if in_first_half is True:
+        in_first_half = False
+    else:
+        in_first_half = True
+    if actual_point.lower() == 'x':
+        in_first_half = True
+        frame += 1
+    return in_first_half, frame
