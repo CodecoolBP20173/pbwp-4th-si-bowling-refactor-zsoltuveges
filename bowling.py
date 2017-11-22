@@ -7,15 +7,15 @@ def score(game):
             result += 10 - last_point
         else:
             result += get_value(actual_point)
-        if frame < 10  and get_value(actual_point) == 10:
+        if frame < 10 and get_value(actual_point) == 10:
             if actual_point == '/':
-                result += get_value(game[index+1])
+                result += get_value(game[index + 1])
             elif actual_point.lower() == 'x':
-                result += get_value(game[index+1])
-                if game[index+2] == '/':
-                    result += 10 - get_value(game[index+1])
+                result += get_value(game[index + 1])
+                if game[index + 2] == '/':
+                    result += 10 - get_value(game[index + 1])
                 else:
-                    result += get_value(game[index+2])
+                    result += get_value(game[index + 2])
         last_point = get_value(actual_point)
         if not in_first_half:
             frame += 1
@@ -27,6 +27,7 @@ def score(game):
             in_first_half = True
             frame += 1
     return result
+
 
 def get_value(char):
     if char == '1' or char == '2' or char == '3' or \
