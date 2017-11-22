@@ -1,25 +1,14 @@
 def score(game):
-    result = 0
     frame = 1
+    result = 0
     in_first_half = True
+    last_point = 0
     for index, actual_point in enumerate(game):
-        if actual_point == '/':
-            result += 10 - last_point
-        else:
-            result += get_value(actual_point)
-        if frame < 10 and get_value(actual_point) == 10:
-            if actual_point == '/':
-                result += get_value(game[index + 1])
-            elif actual_point.lower() == 'x':
-                result += get_value(game[index + 1])
-                if game[index + 2] == '/':
-                    result += 10 - get_value(game[index + 1])
-                else:
-                    result += get_value(game[index + 2])
+        result += calculate_frame_result(index, actual_point, frame, game, last_point)
         last_point = get_value(actual_point)
         if not in_first_half:
             frame += 1
-        if in_first_half == True:
+        if in_first_half is True:
             in_first_half = False
         else:
             in_first_half = True
@@ -42,3 +31,21 @@ def get_value(char):
         return 0
     else:
         raise ValueError()
+
+
+def calculate_frame_result(index, actual_point, frame, game, last_point):
+    actual_result = 0
+    if actual_point == '/':
+        actual_result += 10 - last_point
+    else:
+        actual_result += get_value(actual_point)
+    if frame < 10 and get_value(actual_point) == 10:
+        if actual_point == '/':
+            actual_result += get_value(game[index + 1])
+        elif actual_point.lower() == 'x':
+            actual_result += get_value(game[index + 1])
+            if game[index + 2] == '/':
+                actual_result += 10 - get_value(game[index + 1])
+            else:
+                actual_result += get_value(game[index + 2])
+    return actual_result
