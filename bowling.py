@@ -10,7 +10,7 @@ def score(game):
         if frame < 10  and get_value(actual_point) == 10:
             if actual_point == '/':
                 result += get_value(game[index+1])
-            elif actual_point == 'X' or actual_point == 'x':
+            elif actual_point.lower() == 'x':
                 result += get_value(game[index+1])
                 if game[index+2] == '/':
                     result += 10 - get_value(game[index+1])
@@ -23,7 +23,7 @@ def score(game):
             in_first_half = False
         else:
             in_first_half = True
-        if actual_point == 'X' or actual_point == 'x':
+        if actual_point.lower() == 'x':
             in_first_half = True
             frame += 1
     return result
@@ -33,7 +33,7 @@ def get_value(char):
        char == '4' or char == '5' or char == '6' or \
        char == '7' or char == '8' or char == '9':
         return int(char)
-    elif char == 'X' or char == 'x':
+    elif char.lower() == 'x':
         return 10
     elif char == '/':
         return 10
