@@ -1,4 +1,7 @@
 def score(game):
+    """
+    This is like a "main" func, this function call the others.
+    """
     frame = 1
     result = 0
     in_first_half = True
@@ -16,6 +19,9 @@ def score(game):
 
 
 def get_value(char, MAX_POINT, STRIKE, SPARE, MISS):
+    """
+    This function get a score as 'char', and it returns the value of score in integer.
+    """
     try:
         if char.lower() == STRIKE:
             return MAX_POINT
@@ -30,6 +36,9 @@ def get_value(char, MAX_POINT, STRIKE, SPARE, MISS):
 
 
 def calculate_frame_result(index, actual_point, frame, game, last_point, MAX_POINT, MAX_FRAME, STRIKE, SPARE, MISS):
+    """
+    It returns the result of the actual frame
+    """
     actual_result = 0
     if actual_point == SPARE:
         actual_result += MAX_POINT - last_point
@@ -48,6 +57,9 @@ def calculate_frame_result(index, actual_point, frame, game, last_point, MAX_POI
 
 
 def checking_first_half(in_first_half, actual_point, frame, STRIKE):
+    """
+    This function check that the actual frame has the first or second round. It returns two value; in_first_half, frame.
+    """
     if not in_first_half:
         frame += 1
     if in_first_half is True:
